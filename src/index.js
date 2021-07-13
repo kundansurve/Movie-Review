@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import home from './Home/home';
+import login from './Login/login';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
             renders the first one that matches the current URL. */}
         <Switch>
         <Route exact path="/" component={home}/>
+        <Route exact path="/login" component={login}/>
         </Switch>
     </Router>
   );

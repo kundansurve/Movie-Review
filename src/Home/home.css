@@ -1,10 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
-body{
-  background: #f2f2f2;
-  font-family: 'Open Sans', sans-serif;
-}
-
 .search {
   width: 100%;
   position: relative;
@@ -40,9 +35,82 @@ body{
 
 /*Resize the wrap to see the search bar change!*/
 .wrap{
-  width: 30%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 100%;
+  margin: 40px 20px;
+}
+.filter{
+  background-color: rgb(230, 224, 224);
+  width:25%;
+  height:85vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top:0px;
+}
+
+.movieList{
+  background-color: white;
+  width:100%;
+  height:85vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items:flex-start;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+.movieBox{
+  width:60%;
+  height: 20vh;
+  background-color: rgb(240, 240, 240);
+  box-shadow:5px 5px 5px 5px #888888;
+  padding:10px 10px;
+  display: flex;
+  justify-content:flex-start;
+  flex-direction:center;
+  margin-top:6vh;
+  margin-left:5vw;
+}
+.movieBox img{
+  height: 90%;
+  width: 15%;
+  margin:10px 10px;
+}
+.movie{
+  width:auto;
+}
+@media only screen and (min-width: 400px) {
+ 
+  .home{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top:0px;
+    height: fit-content;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .filter{
+    background-color: rgb(214, 209, 209);
+    width:100%;
+    height:10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .movieBox{
+    width: 80%;
+    padding: auto;
+    height:auto;
+  }
+  .movieBox img{
+    height: 90%;
+    width: 30%;
+    margin:10px 10px;
+  }
 }
