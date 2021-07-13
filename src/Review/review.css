@@ -1,0 +1,88 @@
+.reviewPage{
+    display: flex;
+    justify-content:flex-start;
+    align-items:center;
+}
+.movieDetails{
+    width:30%;
+    height: 90vh;
+    display: flex;
+    justify-content:flex-start;
+    align-items:flex-start;
+    flex-direction: column;
+    margin-left:5%;
+    text-align:center;
+    margin-right:0%;
+}
+.movieImage{
+    margin:30px 0px;
+    width:25vw;
+    height: 25vw;
+}
+.reviews{
+    width:60%;
+    height: 90vh;
+    display: flex;
+    justify-content:flex-start;
+    align-items:flex-start;
+    flex-direction: column;
+    margin-left:0%;
+    text-align:center;
+    overflow: scroll;
+}
+.reviews::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  .reviews::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  .reviews::-webkit-scrollbar-thumb {
+    background: rgb(96, 190, 221); 
+    border-radius: 10px;
+    
+  }
+  
+  /* Handle on hover */
+  .reviews::-webkit-scrollbar-thumb:hover {
+    background: rgb(96, 190, 221); 
+    height:20px;
+  }
+.userReview{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border-bottom:1px solid black;
+    margin: 2vh 0vh;
+    margin-left:10px;
+    width:90%;
+}
+.detailReview{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-left:4vh;
+}
+@media screen and (max-width: 400px) {
+    .reviewPage{
+        flex-direction: column;
+    }
+    .movieDetails{
+        height:auto;
+        justify-content:center;
+        align-items:center;
+        width:90%;
+    }
+    .reviews{
+        width:90%;
+    }
+    .movieImage{
+        margin:30px 0px;
+        width:60vw;
+        height: 60vw;
+    }
+  }

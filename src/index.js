@@ -4,6 +4,7 @@ import './index.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import home from './Home/home';
 import login from './Login/login';
+import reviews from './Review/review';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Switch>
         <Route exact path="/" component={home}/>
         <Route exact path="/login" component={login}/>
+        <Route exact path="/reviews" component={reviews}/>
         </Switch>
     </Router>
   );
