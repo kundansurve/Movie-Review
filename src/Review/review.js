@@ -1,7 +1,15 @@
 import React from 'react';
 import './review.css';
 
-
+function Revinfo(props){
+    return (<div className="userReview">
+    <h4 className="revivwer">{props.name}</h4>
+    <div className="detailReview">
+        <h5>Ratings:{props.ratings}</h5>
+        <p>{props.info}</p>
+    </div>
+    </div>); 
+}
 class review extends React.Component {
     constructor(props) {
         super(props);
@@ -22,48 +30,8 @@ class review extends React.Component {
                 <p className="movieInfo">Info</p>
             </div>
             <div className="reviews">
-                <div className="userReview">
-                <h4 className="revivwer">Kdsurve</h4>
-                <div className="detailReview">
-                    <h5>Ratings</h5>
-                    <p>Best Movie from india</p>
-                </div>
-                </div>
-                <div className="userReview">
-                <h4 className="revivwer">Kdsurve</h4>
-                <div className="detailReview">
-                    <h5>Ratings</h5>
-                    <p>Best Movie from india</p>
-                </div>
-                </div>
-                <div className="userReview">
-                <h4 className="revivwer">Kdsurve</h4>
-                <div className="detailReview">
-                    <h5>Ratings</h5>
-                    <p>Best Movie from india</p>
-                </div>
-                </div>
-                <div className="userReview">
-                <h4 className="revivwer">Kdsurve</h4>
-                <div className="detailReview">
-                    <h5>Ratings</h5>
-                    <p>Best Movie from india</p>
-                </div>
-                </div>
-                <div className="userReview">
-                <h4 className="revivwer">Kdsurve</h4>
-                <div className="detailReview">
-                    <h5>Ratings</h5>
-                    <p>Best Movie from india</p>
-                </div>
-                </div>
-                <div className="userReview">
-                <h4 className="revivwer">Kdsurve</h4>
-                <div className="detailReview">
-                    <h5>Ratings</h5>
-                    <p>Best Movie from india</p>
-                </div>
-                </div>
+                <h3>Reviews:</h3>
+                <Revinfo name="Kundan" ratings="4.5" info="Blockbuster"/>
             </div>
         </div>);
     }
