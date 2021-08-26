@@ -66,7 +66,7 @@ class review extends React.Component {
                     });    
                     }else{
                     this.setState({
-                        user: ""
+                        user: this.props.user
                     });
                     }
                 fetch("../api/reviews"+ window.location.pathname)
@@ -91,7 +91,7 @@ class review extends React.Component {
             }catch (err) {
                 console.log(err);
                 this.setState({
-                    user: ""
+                    user: this.props.user
                 });
             }
 
@@ -168,7 +168,7 @@ class review extends React.Component {
                 }
                 )}
             </div>
-            {(this.state.userReview==[] )?
+            {(this.state.userReview=="" )?
             <div className="Addreview" >
               <div className="rev">
                 <label htmlFor="rating"><b>Rating</b></label>

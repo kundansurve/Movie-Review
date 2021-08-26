@@ -9,7 +9,7 @@ const connect = () => {
         let absoluteHostName = host;
         
 
-        const mongoUri = `mongodb+srv://Kdsurve:KDSreview@moviereview.0kpdc.mongodb.net/reviewdb?retryWrites=true&w=majority`;
+        const mongoUri = `mongodb://Kdsurve:KDSreview@moviereview-shard-00-00.0kpdc.mongodb.net:27017,moviereview-shard-00-01.0kpdc.mongodb.net:27017,moviereview-shard-00-02.0kpdc.mongodb.net:27017/reviewdb?ssl=true&replicaSet=atlas-fd3yfb-shard-0&authSource=admin&retryWrites=true&w=majority`;
 
         return mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true,'useFindAndModify':false,'useCreateIndex': true });
     } catch (err) {

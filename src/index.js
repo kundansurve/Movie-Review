@@ -39,7 +39,7 @@ class MAinbody extends React.Component {
               'Content-type': 'application/json; charset=UTF-8'
             }
           }).
-          then(window.location = '..'+window.location.pathname)
+          then(window.location = '../')
       }
       document.querySelector(".logout").style.display="none";
   }
@@ -78,7 +78,7 @@ class MAinbody extends React.Component {
         <Route exact path="/"><Home user={this.state.user}/></Route>
         <Route exact path="/login" component={Login}/>
         <Route exact path="/signup" component={signup}/>
-        <Route exact path="/:movieid"><Reviews user={this.state.user}/> </Route>
+        <Route exact path="/:movieid" component={Reviews}> <Reviews user={this.state.user}/></Route>
         </Switch>
     </Router>
     </div>
