@@ -100,7 +100,7 @@ p{
         margin-top: 0px;
         height: fit-content;
         flex-direction: column;
-        background-color: rgba(0,0,0,0.7);  backdrop-filter: blur(1px);
+       background:transparent;
     }
 }
 
@@ -110,8 +110,7 @@ p{
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        background-color: rgba(151, 127, 127, 0.7);
-        backdrop-filter: blur(2px);
+        background:transparent;
     }
     .search{
         margin: auto;

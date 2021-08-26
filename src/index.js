@@ -54,25 +54,25 @@ class MAinbody extends React.Component {
       if(this.state.user===""){
           return <Link to={"./login"}><a>Login</a></Link>;
       }
+      
       return (<div class="dropdown">
-      <button class="dropbtn" onClick={this.ll}>
-        <img style={{zIndex:"6",backgroundColor:"white"}} src="https://img.icons8.com/material/48/000000/user-male-circle--v1.png"/>{this.state.user.firstName}
-        <i class="fa fa-caret-down"></i>
-      </button>
-    </div>);
+      <button class="dropbtn"><img style={{zIndex:"6",backgroundColor:"white"}} src="https://img.icons8.com/material/48/000000/user-male-circle--v1.png"/>{this.state.user.firstName}
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <button href="#" onclick={this.Logout}>logout</button>
+    </div>
+  </div>);
   }
   render(){
     console.log(this.props.location);
-      return <div>
+      return <div style={{minHeight:"850px", backgroundColor: "rgba(0,0,0,0.7)",backdropFilter: "blur(1px)"}}>
         <Router>
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <div class="navbar">
             <h2>Movie Review</h2>
             {this.menu()}
-            <div class="dropdown-content" >
-        <button class="logout" style={{zIndex:"7",backgroundColor:"white",padding:"12px 16px",marginLeft:"10px"}} onClick={this.Logout}>logout</button>
-      </div>
         </div>
         <Switch>
         <Route exact path="/"><Home user={this.state.user}/></Route>
