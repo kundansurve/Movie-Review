@@ -12,6 +12,7 @@ const api = require('./server/api');
 const db = require('./server/db');
 
 
+
 db.connect().then(() => {
     //Handle /api with the api middleware
     app.use('/api', session({

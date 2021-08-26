@@ -9,9 +9,6 @@ const reviews = require('./routes/reviews');
 // Add json and urlencoded middleware
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
-router.get('/',(req,res)=>{
-        res.status(400).send({error:"Api run sucessfully"});
-});
 router.use('/users', users);
 
 router.use('/sessions', sessions);

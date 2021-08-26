@@ -34,7 +34,7 @@ router.post('/',(req,res)=>{
         }
 
         req.session.userId = user.id;
-        res.status(204).send();
+        res.status(204).send(user);
     }).catch(() => {
         res.status(500).send({ error: "Internal Server Error" });
     });
@@ -42,6 +42,7 @@ router.post('/',(req,res)=>{
 
 router.delete('/me', (req, res) => {
     delete req.session.userId;
+    console.log("deleted userid");
     res.status(204).send();
 });
 

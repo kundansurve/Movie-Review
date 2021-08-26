@@ -1,64 +1,88 @@
+
 .reviewPage{
     display: flex;
     justify-content:flex-start;
-    align-items:center;
+    padding-top:20px;
+    bottom:50px;
+    padding-left: 0px;
+    padding-right:0px;
+    margin-right: 0px;
+    background-color: rgba(0,0,0,0.8);
+    min-height: 700px;
 }
 .movieDetails{
-    width:30%;
-    height: 90vh;
+    width:40%;
+    height: 100vh;
     display: flex;
-    justify-content:flex-start;
+    justify-content:center;
     align-items:flex-start;
     flex-direction: column;
-    margin-left:5%;
     text-align:center;
     margin-right:0%;
+    color:white;
+    background-color: rgba(0,0,0,0.4);
 }
 .movieImage{
-    margin:30px 0px;
-    width:25vw;
-    height: 25vw;
+    margin:auto auto;
+    width: 40%;
+    height: 40%;
 }
 .reviews{
-    width:60%;
-    height: 90vh;
+    margin-left: 0px;
+    margin-top:20px;
+    height: auto;
     display: flex;
+    min-height: 300px;
+    width: 100%;
     justify-content:flex-start;
     align-items:flex-start;
     flex-direction: column;
-    margin-left:0%;
     text-align:center;
-    overflow: scroll;
+    overflow-y: scroll;
+    background-color: transparent;
+    border:none;
 }
 .reviews::-webkit-scrollbar {
     width: 10px;
   }
   
   /* Track */
-  .reviews::-webkit-scrollbar-track {
-    border-radius: 10px;
-  }
-   
-  /* Handle */
-  .reviews::-webkit-scrollbar-thumb {
-    background: rgb(96, 190, 221); 
-    border-radius: 10px;
-    
-  }
-  
-  /* Handle on hover */
-  .reviews::-webkit-scrollbar-thumb:hover {
-    background: rgb(96, 190, 221); 
-    height:20px;
-  }
+.Addreview{
+    display: flex;
+    height:300px;
+    align-items: center;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0px;
+}
+.container{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 60%;
+    margin-right:0px;
+}
+.Addreview button {
+    padding:10px;
+    background-color:transparent;
+    color: white;
+    border-radius: 10px 10px;  
+    border:none;  
+}
 .userReview{
     display: flex;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
     border-bottom:1px solid black;
-    margin: 2vh 0vh;
+    border:1px solid white;
+    border-left: 2px solid white;
+    margin: 10px 0px;
     margin-left:10px;
-    width:90%;
+    width:100%;
+    background-color: black;
+    height: 100px;
+    width: 95%;
 }
 .detailReview{
     display: flex;
@@ -67,22 +91,126 @@
     flex-direction: column;
     margin-left:4vh;
 }
-@media screen and (max-width: 400px) {
+p{
+    color: white;
+}
+.reviews{
+    color:white;
+}
+
+.movieDetails p{
+    width: 80%;
+    margin: auto auto;
+    text-align: center;
+    display:flex;
+    font:6px;
+    color:white;
+}
+h4{
+    color:white;
+    margin:0px;
+    margin-right: 15px; 
+    margin-left:30px;
+    text-align: center;
+    font:10px;
+}
+.movieName {
+    justify-content:center;
+}
+.movieDetails h4{
+    color: white;
+    margin:0px;
+    margin-right: 15px; 
+    margin-left:30px;
+}
+.textalign{
+    justify-content: left;
+    width:80%;
+}
+.bin{
+    float: right;
+    background-color: black;
+    border:none;
+    margin-left:90px;
+}
+textarea{
+   background-color: transparent;
+   border:none;
+   color:white;
+   height: 80px;
+   width: 100%;
+   border-bottom: 1px solid white; 
+}
+input{
+    background-color: transparent;
+    border: none;
+    color:white;
+    margin: 50px auto;
+    border-bottom: 1px solid white; 
+    width: 20px;
+ }
+ label {
+    float: left;
+}
+  
+span {
+    display: block;
+    overflow: hidden;
+    padding: 0px 4px 0px 6px;
+    border: none;
+    margin:20px;
+}
+  
+input {
+    width: 70%;
+}
+ .rev{
+     display:flex;
+     justify-content:flex-start;
+     flex-direction: column;
+     height: auto;
+     margin:10px 10px 10px 0px;
+     width: 60%;
+     color: white;
+ }
+@media screen and (max-width: 580px) {
     .reviewPage{
         flex-direction: column;
+        justify-content:center;
+        width: 100%;
     }
     .movieDetails{
         height:auto;
         justify-content:center;
         align-items:center;
-        width:90%;
+        width:100%;
+    }
+    .container{
+        width: 100%;
+    }
+    .Addreview{
+        width: 100%;
+        padding:0px;
+        justify-content:flex-start;
     }
     .reviews{
-        width:90%;
+        width:100%;
+        justify-content:flex-start;
+        align-items:center;
     }
     .movieImage{
         margin:30px 0px;
         width:60vw;
         height: 60vw;
+    }
+    .userReview{
+        height:30%;
+        flex-direction:column;
+    }
+    p{
+        text-align: center;
+    }
+    .bin{
+        margin-left:0px;
     }
   }

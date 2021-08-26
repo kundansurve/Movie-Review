@@ -6,11 +6,8 @@ const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 
 router.post('/',(req,res)=>{
-    if(!res.body){
-        res.status(400).send({error:"Email and Password not Provided"});
-        return;
-    }
-    const {email,password}=req.body;
+    
+    const {email,password,firstName,lastName} = req.body;
     if(!email){
         res.status(400).send({error:"Email not provided"});
         return;
@@ -26,10 +23,11 @@ router.post('/',(req,res)=>{
         }
         const hash=bcrypt.hashSync(password);
         const userCredential=new UserCredential({ email, password: hash});
+
         userCredential.save().then(()=>{
-            const user =new User({_id:userCredential.id, email});
+            const user =new User({_id:userCredential.id, email,firstName:firstName ,lastName:lastName});
             user.save().then(()=>{
-                res.status(201).send({id: userCredential.id});
+                res.status(201).send({id: userCredential.id ,firstName:firstName ,lastName:lastName});
             });
         });
     }).catch(() => {
@@ -47,6 +45,7 @@ router.get('/me', auth.authenticate, (req, res) => {
 
 router.get('/:userId', (req, res) => {
     User.findOne({ _id: req.params.userId }).then(user => {
+        console.log(user);
         res.send(user);
     }).catch(() => {
         res.status(500).send({ error: "Internal Server Error" });
@@ -55,7 +54,7 @@ router.get('/:userId', (req, res) => {
 
 router.put('/me', auth.authenticate, (req, res) => {
     if (!req.session.userId) {
-        res.send(401).send({ error: "Not logged in"});
+        res.status(401).send({ error: "Not logged in"});
     }
 
     const { firstName, lastName } = req.body;

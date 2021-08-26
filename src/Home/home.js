@@ -1,41 +1,86 @@
-import React from 'react';
+import { fireEvent } from '@testing-library/react';
+import axios from 'axios';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import './home.css';
 
+
 function Movie(props) {
-    return  (<div className="movieBox">
-                <img src={props.img} alt={props.name}/>
-                <div className="movie">
-                    <h4>{props.name}</h4>
-                    <p className="movieInfo">{props.info}</p>
-                    <h5>Ratings:{props.ratings}</h5>
-                </div>
-            </div>);
+    if (props.img == "" || props.img == null) props.img = "https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1811/pavelstasevich181101028/112815904-no-image-available-icon-flat-vector-illustration.jpg?ver=6";
+    if (props.img == "" || props.img == null) props.rating = "Unavailable";
+    return (<div className="movieBox">
+        <Link to={"/"+props.imdbid}>
+        <img onError={(ev) => { ev.target.src = 'https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1811/pavelstasevich181101028/112815904-no-image-available-icon-flat-vector-illustration.jpg?ver=6'; }} src={props.img} alt={props.name} /></Link>
+        <div className="movie">
+            <h2>{props.name}</h2>
+            <h2>{props.info}</h2>
+            <h2>Ratings:{props.rating}</h2>
+        </div>
+    </div>);
 }
+
 class home extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
-            LoggedIn: false,
+            LoggedIn:"",
+            user:props.user,
+            Allmovies: [],
+            Movies: []
+        }
+        try {
+            fetch("/api/movies/")
+                .then(response => response.json())
+                .then((data) => {
+                    this.setState({
+                        LoggedIn: false,
+                        Allmovies: data,
+                        Movies: data
+                    });
+                })
+        }
+        catch (err) {
+            console.log(err);
+        }
+        try{
+            fetch("/api/users/me")
+            .then(response => response.json())
+            .then((data) => {
+            if(data){
+                this.setState({
+                    LoggedIn: true,
+                    user: data
+                });
+            }else{
+                this.setState({
+                    LoggedIn: false,
+                    user: null
+                });
+            }
+        });}catch (err) {
+
         }
     }
     render() {
+        const searchData=(event)=> {
+            let Data = this.state.Allmovies;
+            let searched = Data.filter(movie => {
+                if(movie["title"]){
+                return movie["title"].startsWith(event.target.value);}
+            });
+            this.setState({ Movies: searched })
+        }
         return (<div className="home">
-            <div className="filter">
-            <div className="wrap">
-                    <div className="search">
-                        <input type="text" className="searchTerm" placeholder="What are you looking for?" />
-                        <button type="submit" className="searchButton">
-                            <i className="fa fa-search"></i>
-                        </button>
+    <div className="search">
+                        <input type="text" className="searchTerm" placeholder="What are you looking for?" onChange={(e) => { searchData(e) }} />
                     </div>
-                </div>
-            </div>
             <div className="movieList">
-                
-                    <Movie name="Bahubali" info="Thriller and Suspense And Historic" ratings={4.5} img="https://i.pinimg.com/564x/86/16/07/8616073e12ee6776aa6c8d78eb6b81c5.jpg"/>
-                    <Movie name="Bahubali" info="Thriller and Suspense And Historic" ratings={4.5} img="https://i.pinimg.com/564x/86/16/07/8616073e12ee6776aa6c8d78eb6b81c5.jpg"/>
-                    <Movie name="Bahubali" info="Thriller and Suspense And Historic" ratings={4.5} img="https://i.pinimg.com/564x/86/16/07/8616073e12ee6776aa6c8d78eb6b81c5.jpg"/>
-                    <Movie name="Bahubali" info="Thriller and Suspense And Historic" ratings={4.5} img="https://i.pinimg.com/564x/86/16/07/8616073e12ee6776aa6c8d78eb6b81c5.jpg"/>                               
+                {this.state.Movies.map((movieobj) => {
+                    if(!movieobj.title)return;
+                    return (<Movie imdbid={movieobj.imdb_id} name={movieobj.title} id={movieobj.id} info={movieobj.geners} rating={movieobj.rating} img={movieobj.poster_path}/>);
+                }
+                )}
             </div>
         </div>);
     }

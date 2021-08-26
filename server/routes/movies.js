@@ -19,13 +19,13 @@ router.get('/:title', (req, res) => {
         res.status(500).send({ error: "Not Found any movie" });
     });
 });
-
-router.get('/:movieid', (req, res) => {
-    Movies.findOne({ movieid:req.params.movieid }).then(movies => {
+router.get('/id/:movieid', (req, res) => {
+    Movies.findOne({ imdb_id: req.params.movieid }).then(movies => {
         res.send(movies);
     }).catch(() => {
         res.status(500).send({ error: "Not Found any movie" });
     });
 });
+
 
 module.exports=router;

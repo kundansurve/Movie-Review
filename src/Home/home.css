@@ -1,19 +1,23 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 .search {
-    width: 100%;
-    position: relative;
+    width: 300px;
+    height: 100px;
     display: flex;
+    margin-left: 100px;
+    background-color: transparent;
+    justify-content:center;
+    margin-top: auto;
+    margin-left:30px;
 }
 
-.searchTerm {
-    width: 100%;
-    border: 3px solid #00B4CC;
+.search input {
+    width: 200px;
     border-right: none;
-    padding: 5px;
     height: 36px;
-    border-radius: 5px 0 0 5px;
+    border-radius: 5px 5px;
     outline: none;
     color: black;
+    background-color: white;
 }
 
 .searchTerm:focus {
@@ -26,7 +30,7 @@
     border: 1px solid #00B4CC;
     background: #00B4CC;
     text-align: center;
-    color: #fff;
+    color: black;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
     font-size: 20px;
@@ -35,90 +39,84 @@
 
 /*Resize the wrap to see the search bar change!*/
 
-.wrap {
-    width: 100%;
-    margin: 40px 20px;
-    height: 80px;
-}
 
-.filter {
-    background-color: rgb(230, 224, 224);
-    width: 25%;
-    height: 85vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    margin-top: 0px;
-}
+
 
 .movieList {
-    background-color: white;
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     width: 100%;
-    height: 85vh;
-    display: flex;
-    justify-content: flex-start;
+    height: auto;
     align-items: flex-start;
-    flex-direction: column;
-    overflow-y: scroll;
+    grid-row-gap:50px;
+    justify-items: center;
+    align-items: center;
+    justify-content: space-around;
+    min-height: 600px;
 }
 
 .movieBox {
-    width: 60%;
-    height: 20vh;
-    background-color: rgb(240, 240, 240);
-    box-shadow: 5px 5px 5px 5px #888888;
-    padding: 10px 10px;
+    min-width: 150px;
+    min-height: 300px;
     display: flex;
-    justify-content: flex-start;
-    flex-direction: center;
-    margin-top: 4vh;
-    margin-left: 5vw;
-    margin-bottom: 2vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 50px;
+    color: white;
+    text-align:center;
+    font-size: 12px;
+    font-weight: 20px;
+    text-decoration: none;
+    background-color: black;
+    box-shadow: 0 5px 45px rgba(255,255,255,0.3);
+    border-radius: 20px 20px 20px 20px;
 }
-
+.movieBox a{
+    height: 270px;
+    width: 220px;
+    margin: 0px;
+    padding:0px;
+}
+p{
+    color:black;
+    font-weight: 200px;
+}
 .movieBox img {
-    height: 90%;
-    width: 15%;
-    margin: 10px 10px;
+    height: 270px;
+    width:220px;
+    border-radius: 20px 20px 20px 20px;
 }
 
 .movie {
     width: auto;
 }
 
-@media only screen and (min-width: 400px) {
+@media only screen and (min-width: 500px) {
     .home {
         display: flex;
         justify-content: center;
         align-items: flex-start;
         margin-top: 0px;
         height: fit-content;
+        flex-direction: column;
+        background-color: rgba(0,0,0,0.7);  backdrop-filter: blur(1px);
     }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 500px) {
     .home {
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        background-color: rgba(151, 127, 127, 0.7);
+        backdrop-filter: blur(2px);
     }
-    .filter {
-        background-color: rgb(214, 209, 209);
-        width: 100%;
-        height: 10vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .search{
+        margin: auto;
     }
-    .movieBox {
-        width: 80%;
-        padding: auto;
-        height: auto;
-    }
-    .movieBox img {
-        height: 90%;
-        width: 30%;
-        margin: 10px 10px;
+    .movieList{
+        grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
     }
 }
