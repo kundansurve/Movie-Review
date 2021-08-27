@@ -23,11 +23,15 @@ class login extends React.Component {
           'Content-type': 'application/json; charset=UTF-8'
         }
       }).then(res => {
-        console.log(res.body);
         if (res.status === 204) {
           window.location = '../';
+        }else{
+          res.json().then((data)=>{
+            console.log(data.error);
+          window.alert(data.error);}
+          )
         }
-      });
+      }).catch((error)=>{window.alert(error)});
     }
     render() {
       return (<div className="loginPage">

@@ -11,11 +11,11 @@ function Revinfo(props){
                         method: 'DELETE'
                       }).then(window.location.reload());
             }catch(err){
-                console.log(err);
+                
             }
         }
         return (<div className="userReview" id="loggerrev">
-                    <h4 className="revivwer">{props.name}</h4>
+                    <h4 className="revivwer">{props.name.substring(0,props.name.lastIndexOf("@"))}</h4>
                     <div className="detailReview">
                         <p>Ratings:{props.ratings}</p>
                         <p>{props.info}</p>
@@ -24,7 +24,7 @@ function Revinfo(props){
                 </div>);
     }
     return (<div className="userReview">
-    <h4 className="revivwer">{props.name}</h4>
+    <h4 className="revivwer">{props.name.substring(0, props.name.lastIndexOf("@"))}</h4>
     <div className="detailReview">
         <p>Ratings:{props.ratings}</p>
         <p>{props.info}</p>
@@ -53,7 +53,7 @@ class review extends React.Component {
                             });
                         })
             } catch(err){
-                console.log(err)
+                
             }
 
             try{
@@ -82,14 +82,13 @@ class review extends React.Component {
                                 allReviews.push(e);
                             }
                         }
-                        console.log(userReview);
                         this.setState({
                             userReview,
                             allReviews});
                         });        
                 })
             }catch (err) {
-                console.log(err);
+                
                 this.setState({
                     user: this.props.user
                 });
@@ -109,13 +108,12 @@ class review extends React.Component {
                                 allReviews.push(e);
                             }
                         }
-                        console.log(userReview);
                         this.setState({
                             userReview,
                             allReviews});
                         });
             }catch(error){
-                console.log(error);
+                
             }
     }
     onInput = event => {
@@ -127,7 +125,6 @@ class review extends React.Component {
             const {rating,moviereview}=this.state;
             const email=this.state.user.email;
             const movieid=this.state.MovieInfo.imdb_id;
-            console.log({rating,moviereview,email,movieid});
             fetch('/api/reviews/review', {
                     method: 'POST',
                     body: JSON.stringify({ email, movieid,rating,review:moviereview }),
@@ -136,12 +133,11 @@ class review extends React.Component {
                     }
                   }).then(window.location.reload());
             }catch(e){
-                console.log(e);
+                
             }
     }
     
     gotologin=e=>{
-        console.log("done");
         window.open( "../login");
     }
     render() {
@@ -157,10 +153,10 @@ class review extends React.Component {
                 <p className="movieInfo"> {this.state.MovieInfo.story}</p>
             </div>
             <div className="container">
+            <p><h4>Reviews:</h4></p>
             <div className="reviews">
-                <p><h4>Reviews:</h4></p>
+                
                 {this.state.userReview.map((value) => {
-                    console.log(value);
                     return <Revinfo name={value.email} _id={value._id} ratings={value.rating} info={value.review}  oninput={this.state.onInput} user={true}/>
                 })}
                 {this.state.allReviews.map((value) => {

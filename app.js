@@ -6,14 +6,20 @@ var genuuid = require('uuid').v4;
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 
+require('dotenv').config();
+
 const port = process.env.PORT || 4000;
 //const movies = require('./src/movies');
 const api = require('./server/api');
 const db = require('./server/db');
 
 
-
-db.connect().then(() => {
+db.connect({
+    host: process.env.DB_HOST,
+    username: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME
+}).then(() => {
     //Handle /api with the api middleware
     app.use('/api', session({
         genid() {

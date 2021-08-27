@@ -41,7 +41,7 @@ class home extends React.Component {
                 })
         }
         catch (err) {
-            console.log(err);
+            
         }
         try{
             fetch("/api/users/me")

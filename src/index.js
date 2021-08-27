@@ -28,7 +28,7 @@ class MAinbody extends React.Component {
           });
       }
   });}catch (err) {
-      console.log(err);
+      
     }   
   } 
   Logout=()=>{
@@ -60,12 +60,11 @@ class MAinbody extends React.Component {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <button href="#" onclick={this.Logout}>logout</button>
+      <button onClick={this.Logout}>logout</button>
     </div>
   </div>);
   }
   render(){
-    console.log(this.props.location);
       return <div style={{minHeight:"850px", backgroundColor: "rgba(0,0,0,0.7)",backdropFilter: "blur(1px)"}}>
         <Router>
         {/* A <Switch> looks through its children <Route>s and

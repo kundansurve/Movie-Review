@@ -14,7 +14,6 @@ class signup extends React.Component {
         this.setState({ [event.target.name]: event.target.value });
       }
     onSignupClick = e => {
-        console.log(e);
         e.preventDefault();
         const { email, password,firstName,lastName} = this.state;
         fetch('/api/users', {
@@ -24,9 +23,15 @@ class signup extends React.Component {
             'Content-type': 'application/json; charset=UTF-8'
           }
         }).then(res => {
-            console.log(res.status);
-            
-          });
+          if (res.status === 204) {
+            window.location = '../';
+          }else{
+            res.json().then((data)=>{
+              console.log(data.error);
+            window.alert(data.error);}
+            )
+          }
+          }).catch((error)=>{window.alert(error)});
       }
     render() {
         return (<div className="loginPage">
