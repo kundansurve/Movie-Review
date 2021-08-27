@@ -5,7 +5,9 @@ const mongoose = require("mongoose");
 const connect = (dbConfig) => {
     try {
         const {host, username, password, database} = dbConfig;
+
         let absoluteHostName = host;
+        
         if (username) {
             if (password !== undefined) {
                 absoluteHostName = `${username}:${password}@${absoluteHostName}`;
@@ -13,8 +15,8 @@ const connect = (dbConfig) => {
                 absoluteHostName = `${username}@${absoluteHostName}`;
             }
         }
-        
-        const mongoUri = `mongodb+srv://${absoluteHostName}/${database}?retryWrites=true&w=majority`;
+
+        const mongoUri = `mongodb+srv://${absoluteHostName}/${database}?retryWrites=true&w=majority`;        ;
 
         return mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true,'useFindAndModify':false,'useCreateIndex': true });
     } catch (err) {
