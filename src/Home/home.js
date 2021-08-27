@@ -67,7 +67,7 @@ class home extends React.Component {
             let Data = this.state.Allmovies;
             let searched = Data.filter(movie => {
                 if(movie["title"]){
-                return movie["title"].startsWith(event.target.value);}
+                return movie["title"].toLowerCase().startsWith(event.target.value.toLowerCase());}
             });
             this.setState({ Movies: searched })
         }

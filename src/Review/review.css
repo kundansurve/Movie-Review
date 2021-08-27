@@ -107,6 +107,8 @@ p{
     display:flex;
     font:6px;
     color:white;
+    padding-bottom:3px;
+    padding-top: 3px;
 }
 h4{
     color:white;
@@ -191,7 +193,7 @@ input {
         width: 100%;
     }
     .Addreview{
-        width: 100%;
+        width: 80%;
         padding:0px;
         justify-content:flex-start;
     }
