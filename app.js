@@ -8,7 +8,7 @@ const MongoStore = require('connect-mongo');
 
 require('dotenv').config();
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
 //const movies = require('./src/movies');
 const api = require('./server/api');
 const db = require('./server/db');
