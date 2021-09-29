@@ -23,8 +23,14 @@ class signup extends React.Component {
             'Content-type': 'application/json; charset=UTF-8'
           }
         }).then(res => {
-          if (res.status === 204) {
-            window.location = '../';
+          if (res.status === 201 || res.status ===204) {
+            fetch('/api/sessions/', {
+              method: 'POST',
+              body: JSON.stringify({ email, password }),
+              headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+              }
+            }).then(window.location = '../').catch((error)=>{console.log(error);})
           }else{
             res.json().then((data)=>{
               console.log(data.error);

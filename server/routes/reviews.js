@@ -18,37 +18,38 @@ router.get('/:movieid', (req, res) => {
 
 router.post('/review', (req, res) => {
     const {email,movieid,rating,review} =req.body;
-    reviewdb.estimatedDocumentCount({ movieid: req.params.movieid })
+    reviewdb.find({ movieid:movieid}).count((err,count)=>{console.log({countis:count});})
     .then((count)=>{
         console.log({count});
         Movies.findOne({"imdb_id":movieid})
         .then((prevdata)=>{
             console.log(prevdata);
-        const newRating=( ((count*parseFloat(prevdata.rating))+ parseFloat(rating))/(count+1));
-        Movies.findOneAndUpdate({"imdb_id":movieid},{"rating":parseFloat(newRating).toFixed(2)},(error,data)=>{
+        const newRating=( ((count*parseInt(prevdata.rating))+ parseInt(rating))/(count+1));
+        Movies.findOneAndUpdate({"imdb_id":movieid},{"rating":parseInt(newRating).toFixed(2)},(error,data)=>{
             if(error)console.log(error);
             else console.log(data);
         }
-        )})
+        )}).then(()=>{
+            const Review=new reviewdb({ email, movieid, rating, review });
+        Review.save().then(reviewdb.findOne({ email, movieid, rating, review })).then((rev)=>res.status(201).send(rev))
+        .catch((error) => {
+            res.status(500).send({ error: "Internal Server Error" });
+        })});
     }).catch((err)=>{console.log(err)});
-    const Review=new reviewdb({ email, movieid, rating, review });
-    Review.save().then(reviewdb.findOne({ email, movieid, rating, review })).then((rev)=>res.status(201).send(rev))
-    .catch((error) => {
-        res.status(500).send({ error: "Internal Server Error" });
-    });
 });
 
 router.delete('/review/:id',(req,res)=>{
     reviewdb.findOne({_id: req.params.id})
     .then((review)=>{
         console.log(review);
-        reviewdb.estimatedDocumentCount({ movieid: review.movieid})
-        .then((count)=>{;
+        reviewdb.find({ movieid: review.movieid}).count((err,count)=>{console.log({countis:count});})
+        .then((count)=>{
+            console.log({reviewid:review.movieid})
             Movies.findOne({"imdb_id":review.movieid})
             .then((prevdata)=>{
-                const newRating=( (((count+1)*parseFloat(prevdata.rating))-parseFloat(review.rating))/(count));
+                const newRating=( (((count)*parseInt(prevdata.rating))-parseInt(review.rating))/(count-1));
                 console.log({count,newRating});
-                Movies.findOneAndUpdate({"imdb_id":review.movieid},{"rating":parseFloat(newRating).toFixed(2)})
+                Movies.findOneAndUpdate({"imdb_id":review.movieid},{"rating":parseInt(newRating).toFixed(2)})
                 .catch((err)=>{res.status(500).send({err})})
             })
             .then(reviewdb.findOneAndDelete({_id: req.params.id})

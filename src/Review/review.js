@@ -113,10 +113,16 @@ class review extends React.Component {
                             allReviews});
                         });
             }catch(error){
-                
+                console.log(error);
             }
     }
     onInput = event => {
+        if(event.target.name==="rating"){
+            if(event.target.value>10 || event.target.value<0){
+                event.target.value=parseInt(event.target.value)%11;
+                return;
+            }
+        }
         this.setState({ [event.target.name]: event.target.value });
       }
 
@@ -131,7 +137,7 @@ class review extends React.Component {
                     headers: {
                       'Content-type': 'application/json; charset=UTF-8'
                     }
-                  }).then(window.location.reload());
+                  }).then(setTimeout(()=>{window.location.reload()},1000));
             }catch(e){
                 
             }
@@ -169,7 +175,7 @@ class review extends React.Component {
               <div className="rev">
                 <label htmlFor="rating"><b>Rating</b></label>
                 <span>
-                <input type="number" id="rating" placeholder="10" name="rating" onInput={this.onInput} required/>
+                <input type="number" id="rating" placeholder="10" name="rating" min="0" max="10" onInput={this.onInput} required/>
                 </span>
                 <label htmlFor="moviereview"><b>Review</b></label>
                 <span>
