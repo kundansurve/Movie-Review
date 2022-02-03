@@ -38,10 +38,10 @@ class login extends React.Component {
             <form action="" onSubmit={this.onLoginClick} id="login" >
               <div className="formcontainer">
                 <label htmlFor="email"><b>Email</b></label>
-                <input type="text" id="email" style={{backgroundColor:"white"}} placeholder="Enter Email" name="email"  onInput={this.onInput} required/>
+                <input type="text" id="email" style={{backgroundColor:"white",color:"black"}} placeholder="Enter Email" name="email"  onInput={this.onInput} required/>
             
                 <label htmlFor="password"><b>Password</b></label>
-                <input type="password" id="password" style={{backgroundColor:"white"}} placeholder="Enter Password" name="password"  onInput={this.onInput} required/>
+                <input type="password" id="password" style={{backgroundColor:"white",color:"black"}} placeholder="Enter Password" name="password"  onInput={this.onInput} required/>
                     
                 <input type="submit" className="button" onclick={this.onLoginClick} value="Login"></input>
               </div>

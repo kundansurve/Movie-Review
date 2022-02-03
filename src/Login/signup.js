@@ -45,16 +45,16 @@ class signup extends React.Component {
               <div className="formcontainer">
 
               <label htmlFor="firstName"><b>First Name</b></label>
-                <input type="text" style={{backgroundColor:"white"}} id="firstName" placeholder="Enter First Name" name="firstName"  onInput={this.onInput} required/>
+                <input type="text" style={{backgroundColor:"white",color:"black"}} id="firstName" placeholder="Enter First Name" name="firstName"  onInput={this.onInput} required/>
 
                 <label htmlFor="lastName"><b>Last Name</b></label>
-                <input type="text" id="lastName" style={{backgroundColor:"white"}} placeholder="Enter Last Name" name="lastName"  onInput={this.onInput} required/>
+                <input type="text" id="lastName" style={{backgroundColor:"white",color:"black"}} placeholder="Enter Last Name" name="lastName"  onInput={this.onInput} required/>
 
                 <label htmlFor="email"><b>Email</b></label>
-                <input type="text" id="email" style={{backgroundColor:"white"}} placeholder="Enter Emal" name="email"  onInput={this.onInput} required/>
+                <input type="text" id="email" style={{backgroundColor:"white",color:"black"}} placeholder="Enter Emal" name="email"  onInput={this.onInput} required/>
             
                 <label htmlFor="password"><b>Password</b></label>
-                <input type="password" id="password" style={{backgroundColor:"white"}} placeholder="Enter Password" name="password"  onInput={this.onInput} required/>
+                <input type="password" id="password" style={{backgroundColor:"white",color:"black"}} placeholder="Enter Password" name="password"  onInput={this.onInput} required/>
                     
                 <input type="submit" className="button" onclick={this.onSignupClick} value="Sign up"></input>
               </div>
