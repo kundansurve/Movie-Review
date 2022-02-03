@@ -8,7 +8,6 @@ function Revinfo(props){
         const delrev=()=>{
             try{
                 const delpath='../api/reviews/review/delete/'+props._id;
-                alert(delpath);
                 fetch(delpath, {
                         method: 'DELETE'
                       }).then(window.location.reload());
