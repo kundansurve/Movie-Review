@@ -51,10 +51,10 @@ class signup extends React.Component {
                 <input type="text" id="lastName" style={{backgroundColor:"white"}} placeholder="Enter Last Name" name="lastName"  onInput={this.onInput} required/>
 
                 <label htmlFor="email"><b>Email</b></label>
-                <input type="text" id="email" placeholder="Enter Emal" name="email"  onInput={this.onInput} required/>
+                <input type="text" id="email" style={{backgroundColor:"white"}} placeholder="Enter Emal" name="email"  onInput={this.onInput} required/>
             
                 <label htmlFor="password"><b>Password</b></label>
-                <input type="password" id="password" placeholder="Enter Password" name="password"  onInput={this.onInput} required/>
+                <input type="password" id="password" style={{backgroundColor:"white"}} placeholder="Enter Password" name="password"  onInput={this.onInput} required/>
                     
                 <input type="submit" className="button" onclick={this.onSignupClick} value="Sign up"></input>
               </div>
