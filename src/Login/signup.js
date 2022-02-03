@@ -45,10 +45,10 @@ class signup extends React.Component {
               <div className="formcontainer">
 
               <label htmlFor="firstName"><b>First Name</b></label>
-                <input type="text" id="firstName" placeholder="Enter First Name" name="firstName"  onInput={this.onInput} required/>
+                <input type="text" style={{backgroundColor:"white"}} id="firstName" placeholder="Enter First Name" name="firstName"  onInput={this.onInput} required/>
 
                 <label htmlFor="lastName"><b>Last Name</b></label>
-                <input type="text" id="lastName" placeholder="Enter Last Name" name="lastName"  onInput={this.onInput} required/>
+                <input type="text" id="lastName" style={{backgroundColor:"white"}} placeholder="Enter Last Name" name="lastName"  onInput={this.onInput} required/>
 
                 <label htmlFor="email"><b>Email</b></label>
                 <input type="text" id="email" placeholder="Enter Emal" name="email"  onInput={this.onInput} required/>

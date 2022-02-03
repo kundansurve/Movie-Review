@@ -96,7 +96,7 @@ class home extends React.Component {
                 <div className="title_wrapper" style={{display:"flex",flexDirection:"column"}}>
                     <h2 style={{color:"white",zIndex:3,display:"flex",justifyContent:"center",alignItems:"center"}}><span style={{marginRight:"0px"}}>Movie</span> <span style={{marginLeft:"2px",color:"#f40612"}}>Review</span></h2>
                 <div class="search">
-      <input type="text" class="searchTerm" placeholder="Search Movie by Name" onChange={(e) => { searchData(e) }}/>
+      <input type="text" class="searchTerm" style={{color:"black",paddingLeft:"1em"}}placeholder="Search Movie by Name" onChange={(e) => { searchData(e) }}/>
       <button type="submit" class="searchButton" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
       <img src="https://img.icons8.com/ios/50/ffffff/search--v1.png" style={{maxHeight:"20px",width:"20px",margin:"0px",padding:"0px"}}/>
      </button>

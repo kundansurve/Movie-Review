@@ -55,11 +55,10 @@ class MAinbody extends React.Component {
           return <Link to={"./login"}><a>Login</a></Link>;
       }
       
-      return (<div class="dropdown">
-      <button class="dropbtn"><img style={{zIndex:"6",backgroundColor:"white"}} src="https://img.icons8.com/material/48/000000/user-male-circle--v1.png"/>{this.state.user.firstName}
-      <i class="fa fa-caret-down"></i>
+      return (<div className="dropdown">
+      <button className="dropbtn"><img style={{zIndex:"6",height:"50px",backgroundColor:"white"}} src="https://toppng.com/uploads/preview/roger-berry-avatar-placeholder-11562991561rbrfzlng6h.png"/>{this.state.user.firstName}
     </button>
-    <div class="dropdown-content">
+    <div className="dropdown-content">
       <button onClick={this.Logout}>logout</button>
     </div>
   </div>);
@@ -69,7 +68,7 @@ class MAinbody extends React.Component {
         <Router>
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL.*/}
-        <div class="navbar" >
+        <div className="navbar" >
             <h2>Movie Review</h2>
             {this.menu()}
         </div>
@@ -81,6 +80,7 @@ class MAinbody extends React.Component {
         <Route exact path="/:movieid" component={ReviewPage}> <ReviewPage user={this.state.user}/></Route>
         </Switch>
     </Router>
+        
     </div>
   }
 }

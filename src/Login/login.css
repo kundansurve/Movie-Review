@@ -1,23 +1,21 @@
 body {font-family: Arial, Helvetica, sans-serif;}
 .loginPage form {
   display: block;
-  backdrop-filter: blur(4px);
   color:white; 
   width:400px;
-  background-color: rgba(255,255,255,0.1);
-box-shadow:inset 5px 5px 45px rgba(255,255,255,.2);
-backdrop-filter: blur(0.5);
-  border-radius: 20px 20px 20px 20px;
+  background-color: #f40612;
+  border-radius: 5px 5px 5px 5px;
 }
 
 input[type=text], input[type=password] {
   width: 100%;
-  padding: 12px 0px;
+  padding: 1em;
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
   color: white;
+  border-radius: 5px;
 }
 
 .button {
