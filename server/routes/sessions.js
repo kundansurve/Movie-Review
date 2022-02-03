@@ -42,7 +42,6 @@ router.post('/',(req,res)=>{
 
 router.delete('/me', (req, res) => {
     delete req.session.userId;
-    console.log("deleted userid");
     res.status(204).send();
 });
 

@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch,Link } from 'react-router-dom';
 import Home from './Home/home';
 import Login from './Login/login';
 import signup from './Login/signup';
-import Reviews from './Review/review';
+import ReviewPage from './Review/review';
 
 class MAinbody extends React.Component {
 
@@ -68,16 +68,17 @@ class MAinbody extends React.Component {
       return <div style={{minHeight:"850px", backgroundColor: "rgba(0,0,0,0.7)",backdropFilter: "blur(1px)"}}>
         <Router>
         {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-        <div class="navbar">
+            renders the first one that matches the current URL.*/}
+        <div class="navbar" >
             <h2>Movie Review</h2>
             {this.menu()}
         </div>
+
         <Switch>
         <Route exact path="/"><Home user={this.state.user}/></Route>
         <Route exact path="/login" component={Login}/>
         <Route exact path="/signup" component={signup}/>
-        <Route exact path="/:movieid" component={Reviews}> <Reviews user={this.state.user}/></Route>
+        <Route exact path="/:movieid" component={ReviewPage}> <ReviewPage user={this.state.user}/></Route>
         </Switch>
     </Router>
     </div>

@@ -15,7 +15,7 @@ body {
 #root{
   margin:0px 0px 40px 0px;
   width:100%;
-  background-image: url("bg2.png");
+  background-color:#0000;
   background-repeat: repeat;
   padding:0px;
   min-height: 700px;
@@ -26,9 +26,9 @@ a {
 }
 .navbar {
   overflow: hidden;
-  background-color: black;;
+  background-color: #f40612;
   font-family: Arial;
-  border-bottom: 1px solid grey;
+
 }
 
 /* Links inside the navbar */
@@ -71,18 +71,7 @@ a {
 }
 
 
-footer {
-  width: 100%;
-  background-color: black;
-  position:fixed;
-  bottom: 0px;
-  color: white;
-  text-align: center;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height: 8vh;
-}
+
 
 .logout{
   color:black;

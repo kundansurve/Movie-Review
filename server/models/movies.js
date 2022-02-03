@@ -37,10 +37,13 @@ const movieSchema = new Schema({
         required: true,
         unique: true
     },
-    "rating":{
-        type: String,
-        required: true,
-        unique: true
+    "ratings":{
+        type:Number,
+        default:0
+    },      
+    "numberofRatings":{
+        type:Number,
+        default:0
     },
     "geners":{
         type: String,

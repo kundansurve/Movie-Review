@@ -5,6 +5,7 @@ const UserCredential = require('../models/user-credential');
 const reviewdb = require('../models/reviews');
 const Movies = require('../models/movies');
 const bcrypt = require('bcryptjs');
+const { response } = require('express');
 
 
 
@@ -16,47 +17,72 @@ router.get('/:movieid', (req, res) => {
     });
 });
 
-router.post('/review', (req, res) => {
-    const {email,movieid,rating,review} =req.body;
-    reviewdb.find({ movieid:movieid}).count((err,count)=>{console.log({countis:count});})
-    .then((count)=>{
-        console.log({count});
-        Movies.findOne({"imdb_id":movieid})
-        .then((prevdata)=>{
-            console.log(prevdata);
-        const newRating=( ((count*parseInt(prevdata.rating))+ parseInt(rating))/(count+1));
-        Movies.findOneAndUpdate({"imdb_id":movieid},{"rating":parseInt(newRating).toFixed(2)},(error,data)=>{
-            if(error)console.log(error);
-            else console.log(data);
+
+router.post('/review/create/:movieid',auth.authenticate,(req,res)=>{
+    const _id = req.session.userId;
+    const {email,review,ratings} =  req.body;
+    const movieid = req.params.movieid; 
+    if(ratings>10 && ratings<0){
+        res.status(400).send("Minimum and Maximum rating is 0 and 10 respectively.");
+        return;
+    }
+    reviewdb.findOne({reviewedBy:_id,movieid})
+    .then((REVIEW)=>{
+        if(REVIEW){
+            res.status(400).send("You have already reviewed this");
+            return;
+        }else{
+            
+            Movies.findOne({"imdb_id":movieid})
+            .then((MOVIES)=>{
+                const newRating = ( parseInt(MOVIES.ratings)* parseInt(MOVIES.numberofRatings)+ ratings)/( parseInt(MOVIES.numberofRatings)+1);
+                const Review = new reviewdb({reviewedBy:_id,email,movieid,review,ratings});
+                Review.save()
+                .then(()=>{
+                    Movies.updateOne({"imdb_id":movieid},{$set:{"ratings":newRating,"numberofRatings":MOVIES.numberofRatings+1}})
+                    .then(()=>res.status(200).send("Successfull"))
+                    .catch(err=>{res.status(400).send({err})})
+                }).catch(err=>{res.status(400).send({err})})
+            }).catch(err=>{res.status(400).send({err})})
         }
-        )}).then(()=>{
-            const Review=new reviewdb({ email, movieid, rating, review });
-        Review.save().then(reviewdb.findOne({ email, movieid, rating, review })).then((rev)=>res.status(201).send(rev))
-        .catch((error) => {
-            res.status(500).send({ error: "Internal Server Error" });
-        })});
-    }).catch((err)=>{console.log(err)});
+    }).catch(err=>res.status(400).send({err}));
 });
 
-router.delete('/review/:id',(req,res)=>{
-    reviewdb.findOne({_id: req.params.id})
-    .then((review)=>{
-        console.log(review);
-        reviewdb.find({ movieid: review.movieid}).count((err,count)=>{console.log({countis:count});})
-        .then((count)=>{
-            console.log({reviewid:review.movieid})
-            Movies.findOne({"imdb_id":review.movieid})
-            .then((prevdata)=>{
-                const newRating=( (((count)*parseInt(prevdata.rating))-parseInt(review.rating))/(count-1));
-                console.log({count,newRating});
-                Movies.findOneAndUpdate({"imdb_id":review.movieid},{"rating":parseInt(newRating).toFixed(2)})
-                .catch((err)=>{res.status(500).send({err})})
-            })
-            .then(reviewdb.findOneAndDelete({_id: req.params.id})
-        .then(res.status(204).send()).catch(() => {
-            res.status(500).send({ error: "Internal Server Error" });
-        }))
-    })}).catch((err)=>{console.log(err)})
+
+router.delete('/review/delete/:reviewId',auth.authenticate,(req,res)=>{
+    const _id = req.session.userId;
+    const reviewId = req.params.reviewId;
+    reviewdb.findOne({_id:reviewId,reviewedBy:_id})
+    .then((REVIEW)=>{
+        if(!REVIEW){
+            res.status(400).send("No such type of review");
+            return;
+        }else{
+            if(_id!=REVIEW.reviewedBy){
+                res.status(400).send("You are not allowed to delete this review");
+                return;
+            }
+            Movies.findOne({"imdb_id":REVIEW.movieid})
+            .then((MOVIES)=>{
+                
+                let newRating=0;
+                if(MOVIES.numberofRatings<=0){
+                    res.status(400).send("No one review this movie yet");
+                    return;
+                }
+                if(MOVIES.numberofRatings>1){
+                    newRating = ( parseInt(MOVIES.ratings)* parseInt(MOVIES.numberofRatings)+ REVIEW.ratings)/( parseInt(MOVIES.numberofRatings)-1);
+                }
+                
+                reviewdb.deleteOne({_id:reviewId})
+                .then(()=>{
+                    Movies.updateOne({"imdb_id":REVIEW.movieid},{$set:{"ratings":newRating,"numberofRatings":MOVIES.numberofRatings-1}})
+                    .then(()=>{res.status(200).send("Successfull");return;})
+                    .catch(err=>{res.status(400).send({err})})
+                }).catch(err=>{res.status(400).send({err})})
+            }).catch(err=>{res.status(400).send({err})})
+        }
+    }).catch(err=>res.status(400).send({err}))
 });
 
 

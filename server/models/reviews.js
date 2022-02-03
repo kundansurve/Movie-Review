@@ -10,11 +10,15 @@ const reviewSchema = new Schema({
         type: String,
         required: true
     },
-    rating: {
-        type: String,
+    ratings: {
+        type: Number,
         required: true
     },
     review: {
+        type: String,
+        required: true
+    },
+    reviewedBy:{
         type: String,
         required: true
     },
