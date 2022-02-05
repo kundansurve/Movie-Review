@@ -3,13 +3,15 @@ const router =express.Router();
 const auth = require('../middlewares/auth');
 const Movies = require('../models/movies');
 const bcrypt = require('bcryptjs');
+const reviewdb = require('../models/reviews');
 
 router.get('/', (req, res) => {
     Movies.find().then(movies => {
-        res.send(movies);
+        res.status(200).send(movies);
     }).catch((err) => {
         res.status(500).send(err);
     });
+
 });
 
 router.get('/:title', (req, res) => {

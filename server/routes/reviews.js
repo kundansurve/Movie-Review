@@ -35,13 +35,23 @@ router.post('/review/create/:movieid',auth.authenticate,(req,res)=>{
             
             Movies.findOne({"imdb_id":movieid})
             .then((MOVIES)=>{
-                const newRating = ( parseInt(MOVIES.ratings)* parseInt(MOVIES.numberofRatings)+ ratings)/( parseInt(MOVIES.numberofRatings)+1);
+                
                 const Review = new reviewdb({reviewedBy:_id,email,movieid,review,ratings});
                 Review.save()
                 .then(()=>{
-                    Movies.updateOne({"imdb_id":movieid},{$set:{"ratings":newRating,"numberofRatings":MOVIES.numberofRatings+1}})
-                    .then(()=>res.status(200).send("Successfull"))
-                    .catch(err=>{res.status(400).send({err})})
+                    reviewdb.aggregate([
+                        {$match:{movieid:movieid}},
+                        {$group: {
+                            _id: "",
+                            average: {
+                              $avg: "$ratings"
+                            }
+                          }}
+                    ]).then((data)=>{
+                        Movies.updateOne({"imdb_id":movieid},{$set:{"ratings":data[0].average},$inc:{"numberofRatings":1}})
+                        .then(()=>res.status(200).send("Successfull"))
+                        .catch(err=>{res.status(400).send({err})})
+                    }).catch(err=>{res.status(400).send({err})})
                 }).catch(err=>{res.status(400).send({err})})
             }).catch(err=>{res.status(400).send({err})})
         }
@@ -64,21 +74,28 @@ router.delete('/review/delete/:reviewId',auth.authenticate,(req,res)=>{
             }
             Movies.findOne({"imdb_id":REVIEW.movieid})
             .then((MOVIES)=>{
-                
-                let newRating=0;
                 if(MOVIES.numberofRatings<=0){
-                    res.status(400).send("No one review this movie yet");
+                    res.status(400).send("No one reviewed this movie yet");
                     return;
                 }
-                if(MOVIES.numberofRatings>1){
-                    newRating = ( parseInt(MOVIES.ratings)* parseInt(MOVIES.numberofRatings)+ REVIEW.ratings)/( parseInt(MOVIES.numberofRatings)-1);
-                }
+                
                 
                 reviewdb.deleteOne({_id:reviewId})
                 .then(()=>{
-                    Movies.updateOne({"imdb_id":REVIEW.movieid},{$set:{"ratings":newRating,"numberofRatings":MOVIES.numberofRatings-1}})
-                    .then(()=>{res.status(200).send("Successfull");return;})
-                    .catch(err=>{res.status(400).send({err})})
+                    reviewdb.aggregate([
+                        {$match:{movieid:MOVIES["imdb_id"]}},
+                        {$group: {
+                            _id: "$movieid",
+                            average: {
+                              $avg: "$ratings"
+                            }
+                          }}
+                    ]).then((data)=>{
+                        const avg=(data.length>0)?data[0].average:null;
+                        Movies.updateOne({"imdb_id":MOVIES["imdb_id"]},{$set:{"ratings":avg},$inc:{"numberofRatings":-1}})
+                        .then(()=>res.status(200).send("Successfull"))
+                        .catch(err=>{res.status(400).send({err})})
+                    }).catch(err=>{res.status(400).send({err})})
                 }).catch(err=>{res.status(400).send({err})})
             }).catch(err=>{res.status(400).send({err})})
         }

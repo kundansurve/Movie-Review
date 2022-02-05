@@ -40,13 +40,16 @@
     min-height: 300px;
     max-height: 500px;
     width: 100%;
-    justify-content:space-evenly;
+    justify-content: flex-start;
     align-items:center;
     flex-direction: column;
     text-align:start;
-    overflow-y: scroll;
+    overflow-x: hidden;
+    overflow-y: auto;
     background-color: transparent;
     border:none;
+    margin-bottom: 1.5em;
+    margin-top: 0.5em;
 }
 .reviews::-webkit-scrollbar {
     width: 10px;

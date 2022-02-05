@@ -4,6 +4,8 @@ const auth = require('../middlewares/auth');
 const UserCredential = require('../models/user-credential');
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
+const reviewdb = require('../models/reviews');
+
 
 router.post('/',(req,res)=>{
     

@@ -10,12 +10,12 @@ function Revinfo(props){
                 const delpath='../api/reviews/review/delete/'+props._id;
                 fetch(delpath, {
                         method: 'DELETE'
-                      }).then(window.location.reload());
+                      }).then(setTimeout(()=>{window.location.reload()},2000));
             }catch(err){
                 alert(err);
             }
         }
-        return (<div className="testimonial">
+        return (<div className="testimonial" style={{marginTop:"1em",marginBottom:"0.5em"}}>
             <img className="deletebtn"  onClick={delrev} src="https://img.icons8.com/material-sharp/24/ffffff/delete-forever.png"/>
             <h4>Rating: {props.ratings}/10</h4>
             <p className="testimonial__text" style={{textAlign:"start"}}>
@@ -28,7 +28,7 @@ function Revinfo(props){
             </div>
         </div>);
     }
-    return (<div className="testimonial">
+    return (<div className="testimonial" style={{marginTop:"1em",marginBottom:"0.5em"}}>
     <h4>Rating: {props.ratings}/10</h4>
     <p className="testimonial__text">
         {props.info}
@@ -177,7 +177,8 @@ class review extends React.Component {
           a 15.9155 15.9155 0 0 1 0 31.831
           a 15.9155 15.9155 0 0 1 0 -31.831"
       />
-      <text x="18" y="20.35" className="percentage">{this.state.MovieInfo.ratings}</text>
+      {(this.state.MovieInfo.ratings)?<text x="18" y="20.35" className="percentage">{this.state.MovieInfo.ratings}</text>:
+      <text x="18" y="20.35" className="percentage" style={{fontSize:"3px"}}>No Reviews</text>}
     </svg>
   </div>
 
