@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 const reviewdb = require('../models/reviews');
 
 router.get('/', (req, res) => {
+    console.log("Okk")
     Movies.find().then(movies => {
         res.status(200).send(movies);
     }).catch((err) => {

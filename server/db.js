@@ -18,7 +18,7 @@ const connect = (dbConfig) => {
 
         const mongoUri = `mongodb+srv://${absoluteHostName}/${database}?retryWrites=true&w=majority`;        ;
 
-        return mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true,'useFindAndModify':false,'useCreateIndex': true });
+        return mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true});
     } catch (err) {
         console.log(`Error connecting to MongoDB: ${err}`);
         throw err;
